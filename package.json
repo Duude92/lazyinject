@@ -6,8 +6,10 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {},
   "devDependencies": {
+    "lint": "^0.8.19",
+    "ts-lint": "^4.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
   "private": true
