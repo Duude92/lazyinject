@@ -1,0 +1,11 @@
+{
+  "name": "simple_sample",
+  "description": "Simple example of usage LazyInject",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
