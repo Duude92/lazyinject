@@ -12,7 +12,6 @@ export class Container {
    */
   get<T>(type: InterfaceType): T | undefined {
     const lazyObject = ContainerRegistry.types.get(type) as Lazy<T>;
-    if (!lazyObject) return undefined;
-    return lazyObject.Value;
+    return lazyObject?.Value;
   }
 }
