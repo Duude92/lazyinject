@@ -1,0 +1,14 @@
+{
+  "name": "01-simple-get",
+  "description": "Simple example of getting object in LazyInject",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "lazyinject": "file:../../"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
