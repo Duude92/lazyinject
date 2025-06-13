@@ -10,9 +10,8 @@ export class Container {
    * @param type Object type to retrieve to
    */
   get<T>(type: InterfaceType): T | undefined {
-    const exp = ContainerRegistry.types.get(type);
-    if (!exp) return undefined;
-    const e2 = new exp();
-    return e2 as T;
+    const ctor = ContainerRegistry.types.get(type);
+    if (!ctor) return undefined;
+    return new ctor() as T;
   }
 }
