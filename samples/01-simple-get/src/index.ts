@@ -6,7 +6,7 @@ const startup = async () => {
     baseDir: __dirname,
     catalogs: ['.'],
   });
-  const simpleObject = container.get('SimpleClass') as SimpleClass;
+  const simpleObject = container.get<SimpleClass>('SimpleClass');
   simpleObject.print();
 };
 
