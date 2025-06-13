@@ -1,10 +1,9 @@
 import { ContainerRegistry } from '../containerRegistry';
 import { InterfaceType } from '../api/interfaceType';
+import { ConstructorType } from '../api/ConstructorType';
 
 export const Export = (interfaceType: InterfaceType) => {
-  console.log('export1', interfaceType);
-  return (constructor: Function) => {
-    console.log('export2');
+  return (constructor: ConstructorType) => {
     ContainerRegistry.types.set(interfaceType, constructor);
   };
 };
