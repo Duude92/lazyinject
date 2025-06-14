@@ -1,5 +1,6 @@
 import { InterfaceType } from '../api/interfaceType';
 import { ContainerRegistry } from '../containerRegistry';
+import { ContainerRegistryStatic } from '../containerRegistry';
 
 export const Import = (interfaceType: InterfaceType) => {
   console.log('import1');
@@ -11,5 +12,7 @@ export const Import = (interfaceType: InterfaceType) => {
     console.log('import', propertyKey);
     console.log(target);
     return ContainerRegistry.types.get(interfaceType);
+    const type = ContainerRegistryStatic.types.get(interfaceType);
+    return;
   };
 };
