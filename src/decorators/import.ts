@@ -12,7 +12,7 @@ export const Import = (interfaceType: InterfaceType) => {
     console.log('import', propertyKey);
     console.log(target);
 
-    ContainerRegistryStatic.setImport(target, interfaceType);
+    ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex);
     return;
   };
 };

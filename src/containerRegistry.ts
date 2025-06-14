@@ -1,10 +1,11 @@
 import { InterfaceType } from './api/interfaceType';
 import { Lazy } from './lazy';
 import { ConstructorType } from './api/ConstructorType';
+import { IImportedType } from './api/IImportedType';
 
 class ContainerRegistry {
   private exportedMap = new Map<InterfaceType, Lazy<unknown>>();
-  private importedMap = new Map<InterfaceType, InterfaceType>();
+  private importedMap = new Map<InterfaceType, IImportedType[]>();
 
   constructor() {}
 
@@ -30,12 +31,23 @@ class ContainerRegistry {
     }
   }
 
-  setImport(ctorType: InterfaceType, importType: InterfaceType): void {
-    this.importedMap.set(ctorType, importType);
+  setImport(
+    ctorType: InterfaceType,
+    importType: InterfaceType,
+    parameterIndex: number,
+  ): void {
+    if (!this.importedMap.has(ctorType)) {
+      this.importedMap.set(ctorType, []);
+    }
+    const importedArray = this.importedMap.get(ctorType)!;
+    importedArray.push({
+      type: importType,
+      paramIndex: parameterIndex,
+    });
   }
 
-  getImport(ctorType: InterfaceType): InterfaceType {
-    return this.importedMap.get(ctorType)!;
+  getImport(ctorType: InterfaceType): IImportedType[] {
+    return this.importedMap.get(ctorType) ?? [];
   }
 }
 
