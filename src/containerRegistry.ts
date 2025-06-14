@@ -8,6 +8,13 @@ class ContainerRegistry {
   constructor() {}
 
   set(type: InterfaceType, constructor: ConstructorType): void {
+    if (typeof type === 'function') {
+      this.exportedMap.set(type.name, new Lazy(constructor));
+    }
+    if (typeof type === 'symbol') {
+      this.exportedMap.set(type.description!, new Lazy(constructor));
+    }
+
     this.exportedMap.set(type, new Lazy(constructor));
   }
 
