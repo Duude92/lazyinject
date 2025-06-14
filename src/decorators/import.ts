@@ -11,7 +11,7 @@ export const Import = (interfaceType: InterfaceType) => {
     console.log('import', propertyKey);
     console.log(target);
 
-    const type = ContainerRegistryStatic.get(interfaceType);
+    const type = ContainerRegistryStatic.getExport(interfaceType);
     return;
   };
 };

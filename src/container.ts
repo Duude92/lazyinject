@@ -10,7 +10,7 @@ export class Container {
    * @param type Object type to retrieve to
    */
   get<T>(type: InterfaceType): T | undefined {
-    const lazyObject = ContainerRegistryStatic.get<T>(type);
+    const lazyObject = ContainerRegistryStatic.getExport<T>(type);
     return lazyObject?.Value;
   }
 }

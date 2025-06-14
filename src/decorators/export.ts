@@ -4,6 +4,6 @@ import { ConstructorType } from '../api/ConstructorType';
 
 export const Export = (interfaceType: InterfaceType) => {
   return (constructor: ConstructorType) => {
-    ContainerRegistryStatic.set(interfaceType, constructor);
+    ContainerRegistryStatic.setExport(interfaceType, constructor);
   };
 };

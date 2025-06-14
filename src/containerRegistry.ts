@@ -4,10 +4,11 @@ import { ConstructorType } from './api/ConstructorType';
 
 class ContainerRegistry {
   private exportedMap = new Map<InterfaceType, Lazy<unknown>>();
+  private importedMap = new Map<InterfaceType, InterfaceType>();
 
   constructor() {}
 
-  set(type: InterfaceType, constructor: ConstructorType): void {
+  setExport(type: InterfaceType, constructor: ConstructorType): void {
     if (typeof type === 'function') {
       this.exportedMap.set(type.name, new Lazy(constructor));
     }
@@ -18,7 +19,7 @@ class ContainerRegistry {
     this.exportedMap.set(type, new Lazy(constructor));
   }
 
-  get<T>(type: InterfaceType): Lazy<T> {
+  getExport<T>(type: InterfaceType): Lazy<T> {
     return this.exportedMap.get(type) as Lazy<T>;
   }
 }
