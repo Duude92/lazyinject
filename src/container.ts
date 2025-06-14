@@ -1,6 +1,5 @@
 import { InterfaceType } from './api/interfaceType';
 import { ContainerRegistryStatic } from './containerRegistry';
-import { Lazy } from './lazy';
 
 /**
  * Container class
@@ -11,7 +10,7 @@ export class Container {
    * @param type Object type to retrieve to
    */
   get<T>(type: InterfaceType): T | undefined {
-    const lazyObject = ContainerRegistryStatic.types.get(type) as Lazy<T>;
+    const lazyObject = ContainerRegistryStatic.get<T>(type);
     return lazyObject?.Value;
   }
 }
