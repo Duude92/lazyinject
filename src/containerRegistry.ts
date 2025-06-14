@@ -22,6 +22,14 @@ class ContainerRegistry {
   getExport<T>(type: InterfaceType): Lazy<T> {
     return this.exportedMap.get(type) as Lazy<T>;
   }
+
+  setImport(ctorType: InterfaceType, importType: InterfaceType): void {
+    this.importedMap.set(ctorType, importType);
+  }
+
+  getImport(ctorType: InterfaceType): InterfaceType {
+    return this.importedMap.get(ctorType)!;
+  }
 }
 
 export const ContainerRegistryStatic = new ContainerRegistry();
