@@ -4,30 +4,49 @@ import { ConstructorType } from './api/ConstructorType';
 import { IImportedType } from './api/IImportedType';
 
 class ContainerRegistry {
-  private exportedMap = new Map<InterfaceType, Lazy<unknown>>();
+  private exportedMap = new Map<InterfaceType, Lazy<unknown>[]>();
   private importedMap = new Map<InterfaceType, IImportedType[]>();
 
   constructor() {}
 
   setExport(type: InterfaceType, constructor: ConstructorType): void {
+    let description = type;
     if (typeof type === 'function') {
-      this.exportedMap.set(type.name, new Lazy(constructor));
+      description = type.name;
     }
     if (typeof type === 'symbol') {
-      this.exportedMap.set(type.description!, new Lazy(constructor));
+      description = type.description!;
     }
-
-    this.exportedMap.set(type, new Lazy(constructor));
+    let array = this.exportedMap.get(type);
+    if (!array) {
+      array = [];
+      this.exportedMap.set(description, array);
+    }
+    array.push(new Lazy(constructor));
   }
 
   getExport<T>(type: InterfaceType): Lazy<T> | undefined {
-    const directGet = this.exportedMap.get(type) as Lazy<T>;
-    if (directGet) return directGet;
+    const directGet = this.exportedMap.get(type);
+    if (directGet) {
+      return directGet[0] as Lazy<T>;
+    }
     if (typeof type === 'function') {
-      return this.exportedMap.get(type.name) as Lazy<T>;
+      return this.exportedMap.get(type.name)![0] as Lazy<T>;
     }
     if (typeof type === 'symbol') {
-      return this.exportedMap.get(type.description!) as Lazy<T>;
+      return this.exportedMap.get(type.description!)![0] as Lazy<T>;
+    }
+  }
+  getMany<T>(type: InterfaceType): Lazy<T>[] | undefined {
+    const directGet = this.exportedMap.get(type);
+    if (directGet) {
+      return directGet as Lazy<T>[];
+    }
+    if (typeof type === 'function') {
+      return this.exportedMap.get(type.name) as Lazy<T>[];
+    }
+    if (typeof type === 'symbol') {
+      return this.exportedMap.get(type.description!) as Lazy<T>[];
     }
   }
 

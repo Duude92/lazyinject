@@ -13,4 +13,8 @@ export class Container {
     const lazyObject = ContainerRegistryStatic.getExport<T>(type);
     return lazyObject?.Value;
   }
+  getMany<T>(type: InterfaceType): T[] | undefined {
+    const lazyObject = ContainerRegistryStatic.getMany<T>(type);
+    return lazyObject?.map(x=>x.Value as T) ?? [];
+  }
 }
