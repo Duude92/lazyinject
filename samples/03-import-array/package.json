@@ -1,0 +1,14 @@
+{
+  "name": "array_import",
+  "description": "Simple example of importing array",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "lazyinject": "file:../../"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
