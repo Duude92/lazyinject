@@ -54,6 +54,7 @@ class ContainerRegistry {
     ctorType: InterfaceType,
     importType: InterfaceType,
     parameterIndex: number,
+    single = true
   ): void {
     if (!this.importedMap.has(ctorType)) {
       this.importedMap.set(ctorType, []);
@@ -62,6 +63,7 @@ class ContainerRegistry {
     importedArray.push({
       type: importType,
       paramIndex: parameterIndex,
+      single
     });
   }
 
