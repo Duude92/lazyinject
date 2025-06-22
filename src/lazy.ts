@@ -20,9 +20,9 @@ export class Lazy<T> {
 
     const dependencies = [];
     for (const dependency of dependenciesTypes) {
-      dependencies[dependency.paramIndex] = ContainerRegistryStatic.getExport(
-        dependency.type,
-      )?.Value;
+      dependencies[dependency.paramIndex] = dependency.single
+        ? ContainerRegistryStatic.getExport(dependency.type)?.Value
+        : ContainerRegistryStatic.getMany(dependency.type)?.map(lazy=>lazy.Value);
     }
 
     const obj = new this.objectCtor(...dependencies) as T;
