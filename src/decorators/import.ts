@@ -12,3 +12,14 @@ export const Import = (interfaceType: InterfaceType) => {
     return;
   };
 };
+
+export const ImportMany = (interfaceType: InterfaceType) => {
+  return (
+      target: ConstructorType,
+      propertyKey: string | symbol,
+      parameterIndex: number,
+  ) => {
+    ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex, false);
+    return;
+  };
+};
