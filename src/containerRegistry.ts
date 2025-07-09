@@ -50,6 +50,13 @@ class ContainerRegistry {
     }
   }
 
+  /**
+   * Adds object to importedArray, which used to instantiate dependencies
+   * @param ctorType Imported object interface identifier
+   * @param importType Imported object constructor identifier
+   * @param parameterIndex Index of constructor parameter
+   * @param single Defines if dependency is single value or array
+   */
   setImport(
     ctorType: InterfaceType,
     importType: InterfaceType,
