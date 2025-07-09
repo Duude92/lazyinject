@@ -2,6 +2,7 @@ import { InterfaceType } from './api/interfaceType';
 import { Lazy } from './lazy';
 import { ConstructorType } from './api/ConstructorType';
 import { IImportedType } from './api/IImportedType';
+import { IContainerRegistryImportOptions } from './api/IContainerRegistryImportOptions';
 
 class ContainerRegistry {
   private exportedMap = new Map<InterfaceType, Lazy<unknown>[]>();
@@ -37,6 +38,7 @@ class ContainerRegistry {
       return this.exportedMap.get(type.description!)![0] as Lazy<T>;
     }
   }
+
   getMany<T>(type: InterfaceType): Lazy<T>[] | undefined {
     const directGet = this.exportedMap.get(type);
     if (directGet) {
@@ -55,14 +57,15 @@ class ContainerRegistry {
    * @param ctorType Imported object interface identifier
    * @param importType Imported object constructor identifier
    * @param parameterIndex Index of constructor parameter
-   * @param single Defines if dependency is single value or array
+   * @param options Additional options
    */
   setImport(
     ctorType: InterfaceType,
     importType: InterfaceType,
     parameterIndex: number,
-    single = true
+    options: IContainerRegistryImportOptions
   ): void {
+    const single = options.single ?? true;
     if (!this.importedMap.has(ctorType)) {
       this.importedMap.set(ctorType, []);
     }
@@ -70,7 +73,8 @@ class ContainerRegistry {
     importedArray.push({
       type: importType,
       paramIndex: parameterIndex,
-      single
+      single,
+      lazy: options.lazy
     });
   }
 
