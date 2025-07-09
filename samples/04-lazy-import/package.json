@@ -1,9 +1,8 @@
 {
-  "name": "simple_sample",
-  "description": "Simple example of usage LazyInject",
+  "name": "lazy_import",
+  "description": "Simple example of importing array of lazy objects",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "start:bun": "bun run src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "lazyinject": "file:../../"
