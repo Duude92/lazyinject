@@ -3,6 +3,12 @@ import { ContainerRegistryStatic } from '../containerRegistry';
 import { ConstructorType } from '../api/ConstructorType';
 import { IImportOptions } from '../api/IImportOptions';
 
+/**
+ * Registers constructor parameter for building dependencies
+ * @param interfaceType {@link InterfaceType} identifier under which given constructor parameter would be registered
+ * @param options {@link IImportOptions} additional parameters for registering
+ * @constructor
+ */
 export const Import = (
   interfaceType: InterfaceType,
   options: IImportOptions | undefined = undefined,
@@ -19,7 +25,12 @@ export const Import = (
     return;
   };
 };
-
+/**
+ * Registers constructor parameter of array type for building dependencies
+ * @param interfaceType {@link InterfaceType} identifier under which given constructor parameter would be registered
+ * @param options {@link IImportOptions} additional parameters for registering
+ * @constructor
+ */
 export const ImportMany = (
   interfaceType: InterfaceType,
   options: IImportOptions | undefined = undefined,
