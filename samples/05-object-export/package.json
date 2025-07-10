@@ -1,0 +1,14 @@
+{
+  "name": "lazy_import",
+  "description": "Simple example of exporting constant object",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "lazyinject": "file:../../"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
