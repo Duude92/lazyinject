@@ -1,5 +1,6 @@
 /tmp
 /out-tsc
+/dist
 
 /node_modules
 **/node_modules
@@ -11,3 +12,5 @@ yarn-error.log*
 
 .vscode/*
 .idea/*
+/tsconfig.tsbuildinfo
+package-lock.json
