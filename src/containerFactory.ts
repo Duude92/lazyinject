@@ -5,9 +5,7 @@ import { Container } from './container';
 
 export class ContainerFactory {
   static async create(options?: IContainerOptions): Promise<Container> {
-    console.log('Creating Container');
     if (options?.catalogs) {
-      console.log('Creating Catalogs');
       options.catalogs.forEach((catalog) => {
         const directory = options.baseDir;
 
@@ -17,10 +15,8 @@ export class ContainerFactory {
           .filter((file) => file.isFile());
 
         files.forEach(async (file) => {
-          console.log('Importing File', file.name);
           const filePath = path.join(file.parentPath, file.name);
-          require(filePath);
-          console.log('Imported file');
+          await import(filePath);
         });
       });
     }
