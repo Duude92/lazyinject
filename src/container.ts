@@ -13,6 +13,10 @@ export class Container {
     const lazyObject = ContainerRegistryStatic.getExport<T>(type);
     return lazyObject?.Value;
   }
+  /**
+   * Retrieves given type objects array from container registry
+   * @param type Object type to retrieve to
+   */
   getMany<T>(type: InterfaceType): T[] | undefined {
     const lazyObject = ContainerRegistryStatic.getMany<T>(type);
     return lazyObject?.map(x=>x.Value as T) ?? [];
