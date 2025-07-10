@@ -1,6 +1,6 @@
 import { InterfaceType } from './api/interfaceType';
 import { Lazy } from './lazy';
-import { ConstructorType } from './api/ConstructorType';
+import { ExportedType } from './api/ConstructorType';
 import { IImportedType } from './api/IImportedType';
 import { IContainerRegistryImportOptions } from './api/IContainerRegistryImportOptions';
 
@@ -10,7 +10,7 @@ class ContainerRegistry {
 
   constructor() {}
 
-  setExport(type: InterfaceType, constructor: ConstructorType): void {
+  setExport(type: InterfaceType, constructor: ExportedType): void {
     let description = type;
     if (typeof type === 'function') {
       description = type.name;
@@ -63,7 +63,7 @@ class ContainerRegistry {
     ctorType: InterfaceType,
     importType: InterfaceType,
     parameterIndex: number,
-    options: IContainerRegistryImportOptions
+    options: IContainerRegistryImportOptions,
   ): void {
     const single = options.single ?? true;
     if (!this.importedMap.has(ctorType)) {
@@ -74,7 +74,7 @@ class ContainerRegistry {
       type: importType,
       paramIndex: parameterIndex,
       single,
-      lazy: options.lazy
+      lazy: options.lazy,
     });
   }
 

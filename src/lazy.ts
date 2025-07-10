@@ -1,8 +1,8 @@
-import { ConstructorType } from './api/ConstructorType';
+import { ExportedType, isConstructorType } from './api/ConstructorType';
 import { ContainerRegistryStatic } from './containerRegistry';
 
 export class Lazy<T> {
-  constructor(private readonly objectCtor: ConstructorType) {}
+  constructor(private readonly objectCtor: ExportedType) {}
 
   private hasValue = false;
   private value: T | undefined = undefined;
