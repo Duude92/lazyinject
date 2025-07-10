@@ -4,13 +4,21 @@ import { ExportedType } from './api/ConstructorType';
 import { IImportedType } from './api/IImportedType';
 import { IContainerRegistryImportOptions } from './api/IContainerRegistryImportOptions';
 
+/**
+ * Container object which stores imported and exported objects|constructor functions
+ */
 class ContainerRegistry {
   private exportedMap = new Map<InterfaceType, Lazy<unknown>[]>();
   private importedMap = new Map<InterfaceType, IImportedType[]>();
 
   constructor() {}
 
-  setExport(type: InterfaceType, constructor: ExportedType): void {
+  /**
+   * Adds given constructor function | object to {@link type} list of exported mappings
+   * @param type Type of {@link exportedObject} function | object
+   * @param exportedObject Constructor function or object that needs to be resolved later
+   */
+  setExport(type: InterfaceType, exportedObject: ExportedType): void {
     let description = type;
     if (typeof type === 'function') {
       description = type.name;
@@ -23,9 +31,13 @@ class ContainerRegistry {
       array = [];
       this.exportedMap.set(description, array);
     }
-    array.push(new Lazy(constructor));
+    array.push(new Lazy(exportedObject));
   }
 
+  /**
+   * Retrieves single Lazy object of previously stored object or constructor function using {@link Export} decorator or {@link $ExportObject} function
+   * @param type Type of object or constructor function to retrieve to
+   */
   getExport<T>(type: InterfaceType): Lazy<T> | undefined {
     const directGet = this.exportedMap.get(type);
     if (directGet) {
@@ -39,6 +51,10 @@ class ContainerRegistry {
     }
   }
 
+  /**
+   * Retrieves list of Lazy objects of previously stored objects or constructor functions using {@link Export} decorator or {@link $ExportObject} function
+   * @param type Type of object or constructor function to retrieve to
+   */
   getMany<T>(type: InterfaceType): Lazy<T>[] | undefined {
     const directGet = this.exportedMap.get(type);
     if (directGet) {
@@ -78,9 +94,16 @@ class ContainerRegistry {
     });
   }
 
+  /**
+   * Retrieves dependency list for given constructor type
+   * @param ctorType Type of class to retrieve dependencies to
+   */
   getImport(ctorType: InterfaceType): IImportedType[] {
     return this.importedMap.get(ctorType) ?? [];
   }
 }
 
+/**
+ * Single {@link ContainerRegistry} static object for whole project
+ */
 export const ContainerRegistryStatic = new ContainerRegistry();
