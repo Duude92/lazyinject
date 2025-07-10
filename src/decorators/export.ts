@@ -7,3 +7,7 @@ export const Export = (interfaceType: InterfaceType) => {
     ContainerRegistryStatic.setExport(interfaceType, constructor);
   };
 };
+
+export const $ExportObject  = (object:object, interfaceType: InterfaceType) =>{
+  ContainerRegistryStatic.setExport(interfaceType, object);
+}
