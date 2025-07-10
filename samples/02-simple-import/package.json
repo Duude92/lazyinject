@@ -2,8 +2,7 @@
   "name": "simple_sample",
   "description": "Simple example of usage LazyInject",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "start:bun": "bun run src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "dependencies": {
     "lazyinject": "file:../../"
