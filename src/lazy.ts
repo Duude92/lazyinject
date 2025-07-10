@@ -13,6 +13,11 @@ export class Lazy<T> {
 
   public get Value(): T | undefined {
     if (this.hasValue) return this.value;
+    if (!isConstructorType(this.objectCtor)) {
+      this.value = this.objectCtor as T;
+      this.hasValue = true;
+      return this.value;
+    }
 
     const dependenciesTypes = ContainerRegistryStatic.getImport(
       this.objectCtor,
