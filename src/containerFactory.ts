@@ -11,7 +11,7 @@ export class ContainerFactory {
 
         const catalogPath = path.resolve(directory, catalog);
         const files = fs
-          .readdirSync(catalogPath, { withFileTypes: true })
+          .readdirSync(catalogPath, { withFileTypes: true, recursive: options.recursive })
           .filter((file) => file.isFile());
 
         files.forEach(async (file) => {
