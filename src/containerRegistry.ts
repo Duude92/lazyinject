@@ -19,18 +19,10 @@ class ContainerRegistry {
    * @param exportedObject Constructor function or object that needs to be resolved later
    */
   setExport(type: InterfaceType, exportedObject: ExportedType): void {
-    let description = type;
-    if (typeof type === 'function') {
-      description = type.name;
-    }
-    if (typeof type === 'symbol') {
-      description = type.description!;
-    }
     let array = this.exportedMap.get(type);
     if (!array) {
       array = [];
       this.exportedMap.set(type, array);
-      this.exportedMap.set(description, array);
     }
     array.push(new Lazy(exportedObject));
   }
