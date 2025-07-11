@@ -2,10 +2,18 @@
   "name": "lazyinject",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
