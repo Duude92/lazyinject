@@ -29,6 +29,7 @@ class ContainerRegistry {
     let array = this.exportedMap.get(type);
     if (!array) {
       array = [];
+      this.exportedMap.set(type, array);
       this.exportedMap.set(description, array);
     }
     array.push(new Lazy(exportedObject));
