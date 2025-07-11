@@ -2,6 +2,7 @@ import { IContainerOptions } from './api/IContainerOptions';
 import path from 'node:path';
 import fs from 'node:fs';
 import { Container } from './container';
+import dynamicImport from "./dynamicImport";
 
 /**
  * Factory to create Container object
@@ -23,7 +24,7 @@ export class ContainerFactory {
 
         files.forEach(async (file) => {
           const filePath = path.join(file.parentPath, file.name);
-          await import(filePath);
+          await dynamicImport(filePath);
         });
       });
     }
