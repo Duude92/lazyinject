@@ -1,9 +1,8 @@
 import { Export, ImportMany, Lazy } from 'lazyinject';
 import { ISomeInterface } from './interface/ISomeInterface';
 
-const symbol = Symbol('SomeClass');
 
-@Export(symbol)
+@Export(SomeClass)
 export class SomeClass {
   randInt: number;
 

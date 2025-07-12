@@ -1,5 +1,5 @@
 import { ContainerFactory } from 'lazyinject';
-import { SomeClass } from './SomeClass';
+import { ISomeClass, someClassSymbol } from './SomeClass';
 
 const bootstrap = async () => {
   const options = {
@@ -7,7 +7,7 @@ const bootstrap = async () => {
     catalogs: ['.', './implementations'],
   };
   const container = await ContainerFactory.create(options);
-  const someClass = container.get<SomeClass>(SomeClass);
+  const someClass = container.get<ISomeClass>(someClassSymbol);
   someClass.print();
   console.log('Hello world');
 };
