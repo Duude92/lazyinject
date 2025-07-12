@@ -155,12 +155,22 @@ const container = await ContainerFactory.create({
 ## Examples
 The repository includes several examples in the samples/ directory:
 
- - `01-simple-get`: Basic container usage without decorators
- - `02-simple-import`: Simple dependency injection with @Import
- - `03-import-array`: Multiple implementations with @ImportMany
- - `04-lazy-import`: Lazy loading with performance benefits
- - `05-object-export`: Exporting object instances
- - `06-js-import`: Basic container usage with JS
+<table>
+<tr><td>
+01-simple-get</td><td>Basic container usage with `@Export` and `container.get&lt;type&gt;`
+</td></tr><tr>
+<td>02-simple-import</td><td>Simple dependency injection with `@Import`</td>
+</tr><tr><td>
+03-import-array</td><td>Multiple implementations with `@ImportMany`</td>
+</tr><tr><td>
+04-lazy-import</td><td>Lazy loading with performance benefits</td>
+</tr><tr><td>
+05-object-export</td><td>Exporting object instances</td>
+</tr><tr><td>
+06-js-import</td><td>Basic container usage with JS</td>
+</tr>
+</table>
+
 ## Building
 ```bash
 npm run build
