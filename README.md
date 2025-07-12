@@ -157,11 +157,11 @@ The repository includes several examples in the samples/ directory:
 
 <table>
 <tr><td>
-01-simple-get</td><td>Basic container usage with `@Export` and `container.get&lt;type&gt;`
+01-simple-get</td><td>Basic container usage with @Export and container.get&lt;type&gt;
 </td></tr><tr>
-<td>02-simple-import</td><td>Simple dependency injection with `@Import`</td>
+<td>02-simple-import</td><td>Simple dependency injection with @Import</td>
 </tr><tr><td>
-03-import-array</td><td>Multiple implementations with `@ImportMany`</td>
+03-import-array</td><td>Multiple implementations with @ImportMany</td>
 </tr><tr><td>
 04-lazy-import</td><td>Lazy loading with performance benefits</td>
 </tr><tr><td>
