@@ -1,0 +1,11 @@
+{
+  "name": "lazy_import",
+  "description": "Example of using with javascript",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "lazyinject": "file:../../"
+  }
+}
