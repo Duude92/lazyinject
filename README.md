@@ -168,6 +168,8 @@ The repository includes several examples in the samples/ directory:
 05-object-export</td><td>Exporting object instances</td>
 </tr><tr><td>
 06-js-import</td><td>Basic container usage with JS</td>
+</tr><tr><td>
+<a href="https://github.com/Duude92/node-file-manager">node-file-manager</a></td><td>Example of usage in separate project using published package</td>
 </tr>
 </table>
 
