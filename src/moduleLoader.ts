@@ -25,6 +25,7 @@ export const resolveAndLoadModules = async (options?: IContainerOptions) => {
   const root = process.cwd();
   if (root) {
     const configFile = path.join(root, 'lazyinject.config.js');
+    if (!fs.existsSync(configFile)) return;
     const lazyConfig = await dynamicImport(configFile);
     const newOptions = {
       baseDir: root,
