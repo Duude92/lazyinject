@@ -10,7 +10,6 @@
     "declaration": true,
     "declarationDir": "dist",
     "moduleResolution": "node",
-    "composite": true,
     "rootDir": "src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
