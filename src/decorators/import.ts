@@ -15,7 +15,7 @@ export const Import = (
 ) => {
   return (
     target: ConstructorType,
-    propertyKey: string | symbol,
+    propertyKey: string | symbol | unknown,
     parameterIndex: number,
   ) => {
     ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex, {
@@ -37,7 +37,7 @@ export const ImportMany = (
 ) => {
   return (
     target: ConstructorType,
-    propertyKey: string | symbol,
+    propertyKey: string | symbol | unknown,
     parameterIndex: number,
   ) => {
     ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex, {
