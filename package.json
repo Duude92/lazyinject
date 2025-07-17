@@ -1,6 +1,6 @@
 {
   "name": "@duude92/lazyinject",
-  "version": "0.1.5",
+  "version": "<VERSION>",
   "description": "A lightweight TypeScript dependency injection library with lazy loading capabilities.",
   "main": "./dist/index.js",
   "exports": {
