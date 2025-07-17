@@ -4,14 +4,19 @@ import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts,mts,cts}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
-  { files: ['**/*.{js,mjs,cjs,ts,mts,cts}'], languageOptions: { globals: globals.browser } },
-  tseslint.configs.recommended,
-  globalIgnores(['dist/*', 'samples/*', 'jest.config.js']),
   {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    plugins: { js },
+    extends: ['js/recommended', ...tseslint.configs.recommended],
+    languageOptions: { globals: { ...globals.browser, ...globals.jest, ...globals.node } },
+  },
+  {
+    plugins: { '@typescript-eslint': tseslint.plugin },
+
     rules: {
-      ignoreRestArgs: true,
+      '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
     },
   },
+  { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
+  globalIgnores(['dist/*', 'samples/*', 'jest.config.js', 'coverage/*']),
 ]);
