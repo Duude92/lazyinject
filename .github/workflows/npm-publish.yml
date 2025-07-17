@@ -36,6 +36,7 @@ jobs:
       - name: Set package verion
         run: sed -i 's/<VERSION>/${{ steps.version.outputs.version }}/g' package.json
       - run: npm install
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
