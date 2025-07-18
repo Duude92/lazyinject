@@ -13,8 +13,12 @@ export const loadConfig = async () => {
   const root = process.cwd();
   if (root) {
     const configFile = path.join(root, 'lazyinject.config.js');
-    if (!fs.existsSync(configFile)) return;
+    if (!fs.existsSync(configFile)) {
+      config = {};
+      return false;
+    }
     const lazyConfig = await dynamicImport(configFile);
     config = lazyConfig.default;
   }
+  return true;
 };
