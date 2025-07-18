@@ -18,9 +18,11 @@ const loadModules = (options: IContainerOptions) => {
     });
   });
 };
-export const resolveAndLoadModules = async (options?: IContainerOptions) => {
-  if (options?.catalogs) {
-    loadModules(options);
+export const resolveAndLoadModules = async (options?: StandaloneContainerOptions) => {
+  if (typeof options !== 'string') {
+    if (options?.catalogs) {
+      loadModules(options);
+    }
   }
   const root = process.cwd();
   if (root) {
