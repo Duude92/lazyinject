@@ -1,5 +1,5 @@
-import { ContainerFactory } from 'lazyinject';
 import { ISomeClass, someClassSymbol } from './SomeClass';
+import { ContainerFactory } from '@duude92/lazyinject';
 
 const bootstrap = async () => {
   const container = await ContainerFactory.create();

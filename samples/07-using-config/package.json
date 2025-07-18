@@ -5,7 +5,7 @@
     "start": "ts-node src/index.ts"
   },
   "dependencies": {
-    "lazyinject": "file:../../"
+    "@duude92/lazyinject": "^0.1.8"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",

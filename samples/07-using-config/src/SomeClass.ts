@@ -1,4 +1,4 @@
-import { Export, ImportMany, Lazy } from 'lazyinject';
+import { Export, ImportMany } from '@duude92/lazyinject';
 import { ISomeInterface } from './interface/ISomeInterface';
 
 export const someClassSymbol = Symbol('SomeClass');

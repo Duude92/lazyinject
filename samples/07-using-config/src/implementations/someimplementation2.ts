@@ -1,5 +1,5 @@
 import { ISomeInterface } from '../interface/ISomeInterface';
-import { Export } from 'lazyinject';
+import { Export } from '@duude92/lazyinject';
 
 @Export('ISomeInterface')
 export class SomeImplementation2 implements ISomeInterface {
