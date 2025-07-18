@@ -20,7 +20,7 @@ describe('Container factory tests', () => {
     const pathSpy = jest.spyOn(path, 'resolve');
     const container = await ContainerFactory.create({
       baseDir: __dirname,
-      catalogs: ['.'],
+      catalogs: [{ path: '.' }],
     });
     expect(container).toBeDefined();
     expect(container).toBeInstanceOf(Container);
@@ -30,7 +30,7 @@ describe('Container factory tests', () => {
     await expect(
       ContainerFactory.create({
         baseDir: __dirname,
-        catalogs: ['SomeNonExistentDirectory'],
+        catalogs: [{ path: 'SomeNonExistentDirectory', recursive: true }],
       }),
     ).rejects.toThrow('ENOENT');
   });
