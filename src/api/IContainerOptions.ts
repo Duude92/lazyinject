@@ -10,6 +10,8 @@
  *   recursive: true
  * }
  */
+export type StandaloneContainerOptions = IContainerOptions | string | 'default';
+
 export interface IContainerOptions {
   baseDir: string;
   catalogs?: string[];
