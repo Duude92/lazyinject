@@ -14,7 +14,10 @@ export class ContainerFactory {
    * @param options Provided options. See {@link IContainerOptions}
    */
   static async create(options?: StandaloneContainerOptions): Promise<Container> {
-    if (!this.isConfigLoaded) await loadConfig();
+    if (!this.isConfigLoaded) {
+      this.isConfigLoaded = await loadConfig();
+      if (!this.isConfigLoaded && !options) throw new Error('Config is not provided');
+    }
     await resolveAndLoadModules(options ?? 'default');
 
     return new Container();
