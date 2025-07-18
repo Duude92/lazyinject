@@ -8,7 +8,7 @@ export interface ContainerOption {
 
 export interface CatalogOptions {
   path: string;
-  recursive: boolean;
+  recursive?: boolean;
 }
 
 export declare type Config = LazyInjectContainerOptions;
