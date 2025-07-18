@@ -1,12 +1,12 @@
 interface LazyInjectContainerOptions {
-  containers: Record<string | 'default', ContainerOption>[];
+  [containers: string | 'default']: ContainerOption;
 }
 
-interface ContainerOption {
+export interface ContainerOption {
   catalogs: Array<CatalogOptions>;
 }
 
-interface CatalogOptions {
+export interface CatalogOptions {
   path: string;
   recursive: boolean;
 }
