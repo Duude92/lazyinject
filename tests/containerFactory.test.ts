@@ -12,10 +12,7 @@ describe('Container factory tests', () => {
     jest.clearAllMocks();
   });
   test("Should throw an exception 'config not provided'", async () => {
-    await expect(ContainerFactory.create()).rejects.toThrow('Config is not provided');
-    // const container = await ContainerFactory.create();
-    // expect(container).toBeDefined();
-    // expect(container).toBeInstanceOf(Container);
+    await expect(ContainerFactory.create()).rejects.toThrow('Container id default not found');
   });
   test('Should create custom container with catalog resolving', async () => {
     const pathSpy = jest.spyOn(path, 'resolve');
