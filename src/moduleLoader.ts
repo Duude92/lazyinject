@@ -2,7 +2,7 @@ import { IContainerOptions, StandaloneContainerOptions } from './api/IContainerO
 import path from 'node:path';
 import fs from 'node:fs';
 import dynamicImport from './dynamicImport';
-import { getConfig } from './containerConfig';
+import { getConfig, loadConfig } from './containerConfig';
 
 const loadModules = (options: IContainerOptions) => {
   options.catalogs!.forEach((catalog) => {
@@ -19,7 +19,13 @@ const loadModules = (options: IContainerOptions) => {
     });
   });
 };
+let isConfigLoaded: boolean = false;
+
 export const resolveAndLoadModules = async (options?: StandaloneContainerOptions) => {
+  if (!isConfigLoaded) {
+    isConfigLoaded = await loadConfig();
+    if (!isConfigLoaded && !options) throw new Error('Config is not provided');
+  }
   if (typeof options !== 'string') {
     if (options?.catalogs) {
       loadModules(options);
