@@ -3,11 +3,12 @@ import { Lazy } from './lazy';
 import { ExportedType } from './api/ConstructorType';
 import { IImportedType } from './api/IImportedType';
 import { IContainerRegistryImportOptions } from './api/IContainerRegistryImportOptions';
+import { Container } from './container';
 
 /**
  * Container object which stores imported and exported objects|constructor functions
  */
-class ContainerRegistry {
+export class ContainerRegistry {
   private exportedMap = new Map<InterfaceType, Lazy<unknown>[]>();
   private importedMap = new Map<InterfaceType, IImportedType[]>();
 
@@ -100,3 +101,12 @@ class ContainerRegistry {
  * Single {@link ContainerRegistry} static object for whole project
  */
 export const ContainerRegistryStatic = new ContainerRegistry();
+const containersRegistry = {
+  registry: new Map<string, Container>(),
+  register(container: Container, containerConfigId: string) {
+    this.registry.set(containerConfigId, container);
+  },
+};
+export const RegisterContainer = (container: Container, containerConfigId: string) => {
+  containersRegistry.register(container, containerConfigId);
+};
