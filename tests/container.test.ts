@@ -15,7 +15,7 @@ describe('Container', () => {
   let container: Container;
 
   beforeEach(() => {
-    container = new Container();
+    container = new Container(ContainerRegistryStatic);
     jest.clearAllMocks();
   });
 
