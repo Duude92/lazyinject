@@ -106,12 +106,18 @@ export const containersRegistry: IContainersRegistry = {
   currentContainer: null,
   register(container: Container, containerConfigId: string) {
     this.registry.set(containerConfigId, container);
-    this.currentContainer = containerConfigId;
+    this.currentContainer = container;
+  },
+  setExport(type: InterfaceType, exportedObject: ExportedType): void {
+    const currentContainerRegistry = this.currentContainer?.ContainerRegistry;
+    if (!currentContainerRegistry) throw new Error('No current container set');
+    currentContainerRegistry.setExport(type, exportedObject);
   },
 };
 
 interface IContainersRegistry {
   registry: Map<string, Container>;
+  currentContainer: null | Container;
   register: (container: Container, containerConfigId: string) => void;
-  currentContainer: null | string;
+  setExport: (type: InterfaceType, exportedObject: ExportedType) => void;
 }
