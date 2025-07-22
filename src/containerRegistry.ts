@@ -101,12 +101,9 @@ export class ContainerRegistry {
  * Single {@link ContainerRegistry} static object for whole project
  */
 export const ContainerRegistryStatic = new ContainerRegistry();
-const containersRegistry = {
+export const containersRegistry = {
   registry: new Map<string, Container>(),
   register(container: Container, containerConfigId: string) {
     this.registry.set(containerConfigId, container);
   },
-};
-export const RegisterContainer = (container: Container, containerConfigId: string) => {
-  containersRegistry.register(container, containerConfigId);
 };

@@ -1,7 +1,7 @@
 import { StandaloneContainerOptions } from './api/IContainerOptions';
 import { Container } from './container';
 import { resolveAndLoadModules } from './moduleLoader';
-import { ContainerRegistry, ContainerRegistryStatic, RegisterContainer } from './containerRegistry';
+import { ContainerRegistry, ContainerRegistryStatic, containersRegistry } from './containerRegistry';
 
 /**
  * Factory to create Container object
@@ -13,7 +13,7 @@ export class ContainerFactory {
    */
   static async create(options?: StandaloneContainerOptions): Promise<Container> {
     const container = new Container(ContainerRegistryStatic);
-    if (options && typeof options !== 'object') RegisterContainer(container, options ?? 'default');
+    if (options && typeof options !== 'object') containersRegistry.register(container, options ?? 'default');
     await resolveAndLoadModules(options ?? 'default');
 
     return container;
