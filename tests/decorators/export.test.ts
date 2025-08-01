@@ -1,11 +1,14 @@
-import { beforeEach, describe, expect, jest, test } from '@jest/globals';
-import { ContainerRegistryStatic } from '../../src/containerRegistry';
-import { $ExportObject, Export } from '../../src';
+import { beforeAll, beforeEach, describe, expect, jest, test } from '@jest/globals';
+import { containersRegistry } from '../../src/containerRegistry';
+import { $ExportObject, ContainerFactory, Export } from '../../src';
 
 jest.mock('../../src/containerRegistry');
-const mockedRegistry = ContainerRegistryStatic as jest.Mocked<typeof ContainerRegistryStatic>;
+const mockedRegistry = containersRegistry as jest.Mocked<typeof containersRegistry>;
 
 describe('Export decorators', () => {
+  beforeAll(async () => {
+    await ContainerFactory.create({ baseDir: '', catalogs: [] });
+  });
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -16,22 +19,16 @@ describe('Export decorators', () => {
     const decorator = Export('IMyService');
     decorator(MyService);
 
-    expect(mockedRegistry.setExport).toHaveBeenCalledWith(
-      'IMyService',
-      MyService
-    );
+    expect(mockedRegistry.setExport).toHaveBeenCalledWith('IMyService', MyService);
   });
 
   test('Should register object with $ExportObject function', () => {
     const logger = {
-      log: (msg: string) => console.log(msg)
+      log: (msg: string) => console.log(msg),
     };
 
     $ExportObject(logger, 'ILogger');
 
-    expect(mockedRegistry.setExport).toHaveBeenCalledWith(
-      'ILogger',
-      logger
-    );
+    expect(mockedRegistry.setExport).toHaveBeenCalledWith('ILogger', logger);
   });
 });
