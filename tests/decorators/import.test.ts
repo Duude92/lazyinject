@@ -1,17 +1,20 @@
-import { beforeEach, describe, expect, jest, test } from '@jest/globals';
-import { ContainerRegistryStatic } from '../../src/containerRegistry';
+import { beforeAll, beforeEach, describe, expect, jest, test } from '@jest/globals';
+import { containersRegistry } from '../../src/containerRegistry';
 import { Import, ImportMany } from '../../src';
+import { ContainerFactory } from '../../src';
 
 jest.mock('../../src/containerRegistry');
-const mockedRegistry = ContainerRegistryStatic as jest.Mocked<typeof ContainerRegistryStatic>;
+const mockedRegistry = containersRegistry as jest.Mocked<typeof containersRegistry>;
 
 describe('Import decorators', () => {
+  beforeAll(async () => {
+    await ContainerFactory.create({ baseDir: '', catalogs: [] });
+  });
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  class TestClass {
-  }
+  class TestClass {}
 
   test('Should register Import with single = true and lazy = undefined', () => {
     const decorator = Import('ILogger');
