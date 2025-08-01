@@ -1,5 +1,5 @@
 import { InterfaceType } from '../api/interfaceType';
-import { ContainerRegistryStatic } from '../containerRegistry';
+import { containersRegistry } from '../containerRegistry';
 import { ConstructorType } from '../api/ConstructorType';
 import { IImportOptions } from '../api/IImportOptions';
 
@@ -18,7 +18,7 @@ export const Import = (
     propertyKey: string | symbol | unknown,
     parameterIndex: number,
   ) => {
-    ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex, {
+    containersRegistry.setImport(target, interfaceType, parameterIndex, {
       single: true,
       lazy: options?.lazy,
     });
@@ -40,7 +40,7 @@ export const ImportMany = (
     propertyKey: string | symbol | unknown,
     parameterIndex: number,
   ) => {
-    ContainerRegistryStatic.setImport(target, interfaceType, parameterIndex, {
+    containersRegistry.setImport(target, interfaceType, parameterIndex, {
       single: false,
       lazy: options?.lazy,
     });
