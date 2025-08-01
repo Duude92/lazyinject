@@ -113,6 +113,16 @@ export const containersRegistry: IContainersRegistry = {
     if (!currentContainerRegistry) throw new Error('No current container set');
     currentContainerRegistry.setExport(type, exportedObject);
   },
+  setImport(
+    ctorType: InterfaceType,
+    importType: InterfaceType,
+    parameterIndex: number,
+    options: IContainerRegistryImportOptions,
+  ): void {
+    const currentContainerRegistry = this.currentContainer?.ContainerRegistry;
+    if (!currentContainerRegistry) throw new Error('No current container set');
+    currentContainerRegistry.setImport(ctorType,importType, parameterIndex, options);
+  },
 };
 
 interface IContainersRegistry {
@@ -120,4 +130,10 @@ interface IContainersRegistry {
   currentContainer: null | Container;
   register: (container: Container, containerConfigId: string) => void;
   setExport: (type: InterfaceType, exportedObject: ExportedType) => void;
+  setImport: (
+    ctorType: InterfaceType,
+    importType: InterfaceType,
+    parameterIndex: number,
+    options: IContainerRegistryImportOptions,
+  ) => void;
 }
