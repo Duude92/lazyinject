@@ -25,7 +25,7 @@ export class ContainerRegistry {
       array = [];
       this.exportedMap.set(type, array);
     }
-    array.push(new Lazy(exportedObject));
+    array.push(new Lazy(exportedObject, this));
   }
 
   /**

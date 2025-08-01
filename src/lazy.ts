@@ -1,5 +1,5 @@
 import { ExportedType, isConstructorType } from './api/ConstructorType';
-import { ContainerRegistryStatic } from './containerRegistry';
+import { ContainerRegistry } from './containerRegistry';
 
 /**
  * A wrapper class that lazily resolves and stores a value of type `T`.
@@ -37,8 +37,9 @@ export class Lazy<T> {
    * Creates a new Lazy instance from either a class constructor or an object.
    *
    * @param objectCtor - The constructor function or plain object to wrap.
+   * @param parentContainer - Container that owns this object and other dependencies
    */
-  constructor(private readonly objectCtor: ExportedType) {}
+  constructor(private readonly objectCtor: ExportedType, private readonly parentContainer: ContainerRegistry) {}
 
   private hasValue = false;
   private value: T | undefined = undefined;
@@ -66,7 +67,7 @@ export class Lazy<T> {
       return this.value;
     }
 
-    const dependenciesTypes = ContainerRegistryStatic.getImport(
+    const dependenciesTypes = this.parentContainer.getImport(
       this.objectCtor,
     );
 
@@ -74,11 +75,11 @@ export class Lazy<T> {
     for (const dependency of dependenciesTypes) {
       dependencies[dependency.paramIndex] = dependency.single
         ? dependency.lazy
-          ? ContainerRegistryStatic.getExport(dependency.type)
-          : ContainerRegistryStatic.getExport(dependency.type)?.Value
+          ? this.parentContainer.getExport(dependency.type)
+          : this.parentContainer.getExport(dependency.type)?.Value
         : dependency.lazy
-          ? ContainerRegistryStatic.getMany(dependency.type)
-          : ContainerRegistryStatic.getMany(dependency.type)?.map(
+          ? this.parentContainer.getMany(dependency.type)
+          : this.parentContainer.getMany(dependency.type)?.map(
               (lazy) => lazy.Value,
             );
     }
