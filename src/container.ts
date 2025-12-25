@@ -18,8 +18,15 @@ export class Container {
   /**
    * Retrieves given type objects array from container registry
    * @param type Object type to retrieve to
+   */
+  getMany<T>(type: InterfaceType): T[] | undefined;
+  /**
+   * Retrieves given type objects array from container registry
+   * @param type Object type to retrieve to
    * @param options Options for retrieving objects
    */
+  getMany<T>(type: InterfaceType, options: { lazy: false }): T[] | undefined;
+  getMany<T>(type: InterfaceType, options: { lazy: true }): Lazy<T>[] | undefined;
   getMany<T>(type: InterfaceType, options?: { lazy: boolean }): T[] | Lazy<T>[] | undefined {
     const lazyObject = ContainerRegistryStatic.getMany<T>(type);
     if (options?.lazy) {
