@@ -1,5 +1,6 @@
 import { InterfaceType } from './api/interfaceType';
 import { ContainerRegistryStatic } from './containerRegistry';
+import { Lazy } from './lazy';
 
 /**
  * Container class
@@ -13,12 +14,24 @@ export class Container {
     const lazyObject = ContainerRegistryStatic.getExport<T>(type);
     return lazyObject?.Value;
   }
+
   /**
    * Retrieves given type objects array from container registry
    * @param type Object type to retrieve to
    */
-  getMany<T>(type: InterfaceType): T[] | undefined {
+  getMany<T>(type: InterfaceType): T[] | undefined;
+  /**
+   * Retrieves given type objects array from container registry
+   * @param type Object type to retrieve to
+   * @param options Options for retrieving objects
+   */
+  getMany<T>(type: InterfaceType, options: { lazy: false }): T[] | undefined;
+  getMany<T>(type: InterfaceType, options: { lazy: true }): Lazy<T>[] | undefined;
+  getMany<T>(type: InterfaceType, options?: { lazy: boolean }): T[] | Lazy<T>[] | undefined {
     const lazyObject = ContainerRegistryStatic.getMany<T>(type);
-    return lazyObject?.map(x=>x.Value as T) ?? [];
+    if (options?.lazy) {
+      return lazyObject ?? [];
+    }
+    return lazyObject?.map((x) => x.Value as T) ?? [];
   }
 }
