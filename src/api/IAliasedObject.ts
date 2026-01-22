@@ -10,13 +10,13 @@ export const isAliasedObject = (obj: unknown): obj is IAliasedObject => {
 };
 export const makeAlias = (aliases: string[], obj: Lazy<unknown>): IAliasedObject => {
   return {
-    alias: aliases.pop()!,
+    alias: aliases.shift()!,
     objects: [obj],
     child: aliases.length > 0 ? [makeAlias(aliases, obj)] : undefined,
   };
 };
 export const getAliasedObjects = (path: string[], parent: IAliasedObject): IAliasedObject | undefined => {
-    const alias = path.pop()!;
+    const alias = path.shift()!;
     const obj = parent.child?.find((x) => x.alias === alias);
     if (!obj) return;
     if (path.length < 1) {
