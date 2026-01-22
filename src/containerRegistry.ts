@@ -47,12 +47,13 @@ class ContainerRegistry {
     }
     const path = type.split('.');
     const lazyObject = new Lazy(exportedObject);
-    const alias = path.shift()!;
+    const alias = path[0];
     const aliasedObject = this.exportedMap.get(alias);
     if (!aliasedObject) {
       this.exportedMap.set(alias, makeAlias(path, lazyObject));
       return;
     }
+    path.shift();
     this.addToAlias(path, lazyObject, aliasedObject);
   }
 
